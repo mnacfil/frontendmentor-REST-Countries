@@ -29,6 +29,10 @@ body {
   background: var(--light-mode-background);
 }
 
+a {
+  text-decoration: none;
+}
+
 .center {
   width: 90vw;
   max-width: 1250px;

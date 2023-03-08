@@ -9,11 +9,11 @@ export const AppProvider = ({ children }) => {
     const [error, setError] = useState(false);
     const [countries, setCountries] = useState([]);
     const [featuredCountries, setFeaturedCountries] = useState([]);
+    const [countryDetail, setCountryDetail] = useState(null);
     const [ search, setSearch] = useState('');
     const [filter, setFilter] = useState('');
 
     const fetchAllCountries = async(url) => {
-        console.log("fetching data...");
         setLoading(true);
         try {
             const {data} = await axios(url);
@@ -32,7 +32,18 @@ export const AppProvider = ({ children }) => {
         }
     }
 
-    console.log(featuredCountries);
+    const fetchDetailOfCountry = async (url) => {
+        setLoading(true);
+        try {
+            const {data} = await axios(url);
+            setCountryDetail(data);
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+            setError(true);
+        }
+    }
 
     useState(() => {
         fetchAllCountries(restCounriesAPI);
@@ -46,7 +57,9 @@ export const AppProvider = ({ children }) => {
                 search,
                 filter,
                 loading,
-                error
+                error,
+                countryDetail,
+                fetchDetailOfCountry
             }}
         >
             {children}

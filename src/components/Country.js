@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {formatValue} from '../util/formatter'
+import {formatValue} from '../util/formatter';
+import { Link} from 'react-router-dom';
 
 const Country = (props) => {
   const {
@@ -12,15 +13,17 @@ const Country = (props) => {
   } = props;
 
   return (
-    <Wrapper>
-      <img src={png} alt={alt} />
-      <div className="data">
-        <h3>{common}</h3>
-        <p>Population: <span>{formatValue(population)}</span></p>
-        <p>Region: <span>{region}</span></p>
-        <p>Capital: <span>{capital[0]}</span></p>
-      </div>
-    </Wrapper>
+    <Link to={`/detail/${common}`}>
+      <Wrapper>
+        <img src={png} alt={alt} />
+        <div className="data">
+          <h3>{common}</h3>
+          <p>Population: <span>{formatValue(population)}</span></p>
+          <p>Region: <span>{region}</span></p>
+          <p>Capital: <span>{capital[0]}</span></p>
+        </div>
+      </Wrapper>
+    </Link>
   )
 }
 
