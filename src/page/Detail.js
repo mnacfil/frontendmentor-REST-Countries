@@ -7,7 +7,6 @@ import {Loading} from '../components'
 const Detail = () => {
   const {countryName} = useParams();
   const { countryDetail, fetchDetailOfCountry, loading, error} = useGlobalContext();
-  console.log(`${restCountryAPI}/${countryName}`);
   useEffect(() => {
     fetchDetailOfCountry(`${restCountryAPI}/${countryName}`);
   }, [countryName]);
@@ -15,6 +14,7 @@ const Detail = () => {
   if(loading) return <Loading />
 
   console.log(countryDetail);
+  // name.common, flags.png, region, population, capital, currencies, name.nativeName, sub-region,
 
   return (
     <h1>{countryName} Detail</h1>
