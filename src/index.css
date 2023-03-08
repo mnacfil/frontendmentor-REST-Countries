@@ -28,3 +28,9 @@ body {
   font-family: var(--font-family);
   background: var(--light-mode-background);
 }
+
+.center {
+  width: 90vw;
+  max-width: 1250px;
+  margin: 0 auto;
+}

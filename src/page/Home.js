@@ -6,14 +6,28 @@ const Home = () => {
   return (
     <Wrapper>
       <Header />
-      <Search />
-      <Filter />
+      <div className="controller center">
+        <Search />
+        <Filter />
+      </div>
       <Countries />
     </Wrapper>
   )
 }
 
 const Wrapper = styled.main`
+
+  @media screen and (min-width: 768px){
+
+    .controller {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 3rem;
+      height: 50px;
+    }
+  }
+
 `;
 
 export default Home

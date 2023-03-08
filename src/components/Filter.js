@@ -16,12 +16,10 @@ const Filter = () => {
 }
 
 const Wrapper = styled.div`
-  width: 90vw;
-  margin: 0 auto;
-
+  height: 50px;
   select {
     width: 250px;
-    padding: 1rem;
+    height: 100%;
     outline: none;
     border: none;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -30,6 +28,11 @@ const Wrapper = styled.div`
     option {
       color: red;
     }
+  }
+
+  @media screen and (min-width: 768px){
+
+    margin-bottom: 0;
   }
 `;
 export default Filter

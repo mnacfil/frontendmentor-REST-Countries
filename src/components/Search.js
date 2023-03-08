@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   align-items: center;
   border-radius: 0.5rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  height: 100%;
 
   svg {
     color: var(--light-mode-input);
@@ -38,6 +39,12 @@ const Wrapper = styled.div`
       color: var(--light-mode-input);
     }
   }
+
+  @media screen and (min-width: 768px){
+
+    margin: 0;
+  }
+
 `;
 
 export default Search
