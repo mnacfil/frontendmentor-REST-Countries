@@ -1,32 +1,107 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useGlobalContext } from '../context';
+import {RiArrowDropDownLine} from 'react-icons/ri';
+import ListItem from './ListItem';
 
 const Filter = () => {
-  const {region, setRegion} = useGlobalContext();
+  const { setRegion } = useGlobalContext();
+  const [showRegion, setShowRegion] = useState(false);
 
-  const handleChange = (e) => {
-    // console.log(e.target.value);
-    setRegion(e.target.value);
+  const toggleDropDown = () => {
+    setShowRegion(!showRegion);
+    // set back the value of region to empty state
+    if(!showRegion) {
+      setRegion('');
+    }
   }
-  console.log(region);
+
   return (
     <Wrapper>
-      <select name="region" id="region" value={region} onChange={handleChange}>
-        <option value=""></option>
-        <option value="Africa">Africa</option>
-        <option value="America">America</option>
-        <option value="Asia">Asia</option>
-        <option value="Europe">Europe</option>
-        <option value="Oceania">Oceania</option>
-      </select>
+      <div className="filter">
+        <span className='title'>Filter by Region</span>
+        <button onClick={toggleDropDown}>
+          <RiArrowDropDownLine />
+        </button>
+      </div>
+      { showRegion &&
+        <div className="regions">
+          <ul>
+            <ListItem region='Africa' setRegion={setRegion}/>
+            <ListItem region='America' setRegion={setRegion}/>
+            <ListItem region='Asia' setRegion={setRegion}/>
+            <ListItem region='Europe' setRegion={setRegion}/>
+            <ListItem region='Oceania' setRegion={setRegion}/>
+          </ul>
+        </div>
+      }
     </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
   height: 50px;
-  select {
+  width: 200px;
+  background-color: var(--container-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: relative;
+
+  .filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+
+    .title {
+      margin-left: 6px;
+    }
+
+    button {
+      background: none;
+      border: none;
+      display: grid;
+      place-items: center;
+      padding: 0;
+    }
+
+    svg {
+      cursor: pointer;
+      font-size: 22px;
+      color: var(--text-color);
+      display: inline-block;
+    }
+  }
+
+  .regions {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    width: 100%;
+    border-radius: 8px;
+    background-color: var(--container-color);
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 1rem;
+
+      li {
+        cursor: pointer;
+
+      }
+      li:not(:last-child) {
+        margin-bottom: 8px;
+      }
+
+    }
+  }
+
+  /* select {
     background-color: var(--container-color);
     width: 250px;
     height: 100%;
@@ -35,10 +110,7 @@ const Wrapper = styled.div`
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     border-radius: 8px;
     font-size: 18px;
-    option {
-      color: red !important;
-    }
-  }
+  } */
 
   @media screen and (min-width: 768px){
 

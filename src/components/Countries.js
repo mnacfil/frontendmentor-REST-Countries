@@ -6,7 +6,7 @@ import Loading from './Loading';
 import Error from './Error';
 
 const Countries = () => {
-const {featuredCountries,countries, loading, error, search, region} = useGlobalContext();
+const { featuredCountries, countries, loading, error, search, region } = useGlobalContext();
 
 if(loading) return <Loading />
 if(error) return <Error />
