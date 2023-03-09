@@ -6,6 +6,7 @@ export const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
+    const [detailLoading, setDetailLoading] = useState(true);
     const [error, setError] = useState(false);
     const [countries, setCountries] = useState([]);
     const [featuredCountries, setFeaturedCountries] = useState([]);
@@ -33,14 +34,15 @@ export const AppProvider = ({ children }) => {
     }
 
     const fetchDetailOfCountry = async (url) => {
-        setLoading(true);
+        setDetailLoading(true);
         try {
             const {data} = await axios(url);
-            setCountryDetail(data);
-            setLoading(false)
+            console.log(data);
+            setCountryDetail(data[0]);
+            setDetailLoading(false)
         } catch (error) {
             console.log(error);
-            setLoading(false);
+            setDetailLoading(false);
             setError(true);
         }
     }
@@ -57,6 +59,7 @@ export const AppProvider = ({ children }) => {
                 search,
                 filter,
                 loading,
+                detailLoading,
                 error,
                 countryDetail,
                 fetchDetailOfCountry
