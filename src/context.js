@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from 'axios';
-import {restCounriesAPI, defaultCountries} from './constant';
+import {restCounriesAPI, restCountryAPI,restRegionCountriesAPI ,defaultCountries} from './constant';
 
 export const AppContext = React.createContext();
 
@@ -12,13 +12,12 @@ export const AppProvider = ({ children }) => {
     const [featuredCountries, setFeaturedCountries] = useState([]);
     const [countryDetail, setCountryDetail] = useState(null);
     const [ search, setSearch] = useState('');
-    const [filter, setFilter] = useState('');
+    const [region, setRegion] = useState('');
 
     const fetchAllCountries = async(url) => {
         setLoading(true);
         try {
             const {data} = await axios(url);
-            setCountries(data);
             const featured = data.filter(country => {
                 if(defaultCountries.includes(country.name.common)) {
                     return country;
@@ -37,7 +36,6 @@ export const AppProvider = ({ children }) => {
         setDetailLoading(true);
         try {
             const {data} = await axios(url);
-            console.log(data);
             setCountryDetail(data[0]);
             setDetailLoading(false)
         } catch (error) {
@@ -47,9 +45,47 @@ export const AppProvider = ({ children }) => {
         }
     }
 
-    useState(() => {
+    const fetchCountriesByName = async (url) => {
+        setLoading(true);
+        try {
+            const {data} = await axios(url);
+            const countryThatStarsWith = data.filter(country => country.name.common.toLowerCase().startsWith(search.toLowerCase()));
+            setCountries(countryThatStarsWith);
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+            setError(true);
+        }
+    }
+    const fetchCountriesByRegion = async (url) => {
+        setLoading(true);
+        try {
+            const {data} = await axios(url);
+            console.log(data);
+            setCountries(data);
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+            setError(true);
+        }
+    }
+
+    useEffect(() => {
         fetchAllCountries(restCounriesAPI);
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if(search === '') return;
+        fetchCountriesByName(`${restCountryAPI}/${search}`);
+    }, [search])
+
+    useEffect(() => {
+        if(region === '') return;
+        fetchCountriesByRegion(`${restRegionCountriesAPI}/${region}`);
+    }, [region]);
+
 
     return (
         <AppContext.Provider
@@ -57,12 +93,14 @@ export const AppProvider = ({ children }) => {
                 countries,
                 featuredCountries,
                 search,
-                filter,
+                region,
                 loading,
                 detailLoading,
                 error,
                 countryDetail,
-                fetchDetailOfCountry
+                fetchDetailOfCountry,
+                setSearch,
+                setRegion
             }}
         >
             {children}

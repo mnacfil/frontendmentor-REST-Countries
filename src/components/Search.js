@@ -1,12 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import {FaSearch} from 'react-icons/fa'
+import {FaSearch} from 'react-icons/fa';
+import { useGlobalContext } from '../context';
 
 const Search = () => {
+  const { search, setSearch } = useGlobalContext();
   return (
     <Wrapper>
       <FaSearch />
-      <input type="text" placeholder='Search for a country...'/>
+      <input
+        type="text"
+        placeholder='Search for a country...'
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        />
     </Wrapper>
   )
 }

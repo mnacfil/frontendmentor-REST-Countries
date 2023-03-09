@@ -1,10 +1,20 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { useGlobalContext } from '../context';
 
 const Filter = () => {
+  const {region, setRegion} = useGlobalContext();
+
+  const handleChange = (e) => {
+    // console.log(e.target.value);
+    setRegion(e.target.value);
+  }
+  console.log(region);
   return (
     <Wrapper>
-      <select name="region" id="region">
+      <label htmlFor="region">Filter by region</label>
+      <select name="region" id="region" value={region} onChange={handleChange}>
+        <option value=""></option>
         <option value="Africa">Africa</option>
         <option value="America">America</option>
         <option value="Asia">Asia</option>

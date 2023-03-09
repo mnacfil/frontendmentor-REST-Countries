@@ -20,7 +20,7 @@ const Country = (props) => {
           <h3>{common}</h3>
           <p>Population: <span>{formatValue(population)}</span></p>
           <p>Region: <span>{region}</span></p>
-          <p>Capital: <span>{capital[0]}</span></p>
+          <p>Capital: <span>{capital}</span></p>
         </div>
       </Wrapper>
     </Link>

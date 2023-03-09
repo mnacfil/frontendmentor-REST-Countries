@@ -38,10 +38,10 @@ const Detail = () => {
   return <>
     <Header />
     <Wrapper className='center'>
-      <button>
+      <Link className='back-btn' to='/'>
           <BsArrowLeft />
           Back
-      </button>
+      </Link>
       <div className="detail">
         <div className="detail-flag">
           <img src={svg} alt={alt} />
@@ -87,10 +87,13 @@ const Wrapper = styled.main`
   padding: 2rem 0 ;
   font-size: 16px;
 
-  button {
+  .back-btn, button {
+    width: 110px !important;
+    width: auto;
     display: flex;
     align-items: center;
-    padding: 8px 14px;
+    justify-content: space-evenly;
+    padding: 8px 0;
     border: none;
     background: var(--white);
     outline: none;
@@ -99,10 +102,9 @@ const Wrapper = styled.main`
     font-weight: 400;
     cursor: pointer;
     font-size: 16px;
+    color: #222;
 
     svg {
-      margin-right: 8px;
-      font-weight: 800;
       font-size: 20px;
 
     }
