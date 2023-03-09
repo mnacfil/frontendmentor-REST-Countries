@@ -12,7 +12,6 @@ const Filter = () => {
   console.log(region);
   return (
     <Wrapper>
-      <label htmlFor="region">Filter by region</label>
       <select name="region" id="region" value={region} onChange={handleChange}>
         <option value=""></option>
         <option value="Africa">Africa</option>
@@ -28,6 +27,7 @@ const Filter = () => {
 const Wrapper = styled.div`
   height: 50px;
   select {
+    background-color: var(--container-color);
     width: 250px;
     height: 100%;
     outline: none;
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
     border-radius: 8px;
     font-size: 18px;
     option {
-      color: red;
+      color: red !important;
     }
   }
 

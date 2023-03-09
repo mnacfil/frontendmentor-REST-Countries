@@ -19,7 +19,7 @@ const Search = () => {
 }
 
 const Wrapper = styled.div`
-  background: var(--white);
+  background: var(--container-color);
   margin: 2rem auto 3rem auto;
   padding: 1rem 2rem;
   width: 90vw;
@@ -31,19 +31,20 @@ const Wrapper = styled.div`
   height: 100%;
 
   svg {
-    color: var(--light-mode-input);
+    color: var(--text-color);
     margin-right: 1rem;
   }
   input {
-    outline: none;
     border: none;
+    padding: 5px;
     width: 100%;
+    background-color: var(--container-color);
     &:focus {
       outline: none;
       border: none;
     }
     &::placeholder {
-      color: var(--light-mode-input);
+      color: var(--text-color);
     }
   }
 

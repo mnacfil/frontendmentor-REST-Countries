@@ -7,12 +7,12 @@
 :root {
   --mobile-view: 375px;
   --desktop-view: 1440px;
-  --dark-blue: hsl(209, 23%, 22%);
-  --dark-mode-background: hsl(207, 26%, 17%);
-  --light-mode-background: hsl(0, 0%, 98%);
-  --light-mode-text: hsl(200, 15%, 8%);
+  /* --dark-blue: hsl(209, 23%, 22%);
+  --dark-mode-background: hsl(207, 26%, 17%); */
+  --background-color: hsl(0, 0%, 98%);
+  --text-color: hsl(200, 15%, 8%);
+  --container-color: hsl(0, 0%, 100%);
   --light-mode-input: hsl(0, 0%, 52%);
-  --white: hsl(0, 0%, 100%);
   --font-home-page: 14px;
   --font-detail-page: 16px;
   --font-family: 'Nunito Sans', sans-serif;
@@ -21,12 +21,25 @@
   --font-800: 800;
 }
 
+.light-theme {
+  --background-color: hsl(0, 0%, 98%);
+  --text-color: hsl(200, 15%, 8%);
+  --container-color: hsl(0, 0%, 100%);
+}
+.dark-theme {
+  --background-color: hsl(207, 26%, 17%);
+  --text-color: hsl(0, 0%, 100%);
+  --container-color: hsl(209, 23%, 22%);
+}
+
 body {
   margin: 0;
   padding: 0;
   font-size: var(--font-home-page);
   font-family: var(--font-family);
-  background: var(--light-mode-background);
+  background: var(--background-color);
+  color: var(--text-color);
+
 }
 
 a {

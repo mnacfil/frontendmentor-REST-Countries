@@ -13,6 +13,15 @@ export const AppProvider = ({ children }) => {
     const [countryDetail, setCountryDetail] = useState(null);
     const [ search, setSearch] = useState('');
     const [region, setRegion] = useState('');
+    const [theme, setTheme] = useState('light-theme');
+
+    const toggleTheme = () => {
+        if(theme === 'light-theme'){
+            setTheme('dark-theme');
+        } else {
+            setTheme('light-theme');
+        }
+    }
 
     const fetchAllCountries = async(url) => {
         setLoading(true);
@@ -86,6 +95,9 @@ export const AppProvider = ({ children }) => {
         fetchCountriesByRegion(`${restRegionCountriesAPI}/${region}`);
     }, [region]);
 
+    useEffect(() => {
+        document.documentElement.className = theme;
+    }, [theme]);
 
     return (
         <AppContext.Provider
@@ -98,6 +110,8 @@ export const AppProvider = ({ children }) => {
                 detailLoading,
                 error,
                 countryDetail,
+                theme,
+                toggleTheme,
                 fetchDetailOfCountry,
                 setSearch,
                 setRegion

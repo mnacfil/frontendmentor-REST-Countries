@@ -28,7 +28,8 @@ const Country = (props) => {
 }
 
 const Wrapper = styled.article`
-  background: var(--white);
+  background: var(--container-color);
+  color: var(--text-color);
   border-radius: 8px;
   box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
 
