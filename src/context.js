@@ -1,6 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import {restCounriesAPI, restCountryAPI,restRegionCountriesAPI ,defaultCountries} from './constant';
+import {
+    getCountriesInLS,
+    getThemeInLS,
+    getRegionInLS,
+    getSearchWordInLS,
+    removeCountriesInLS
+} from './util/localStorage';
 
 export const AppContext = React.createContext();
 
@@ -8,12 +15,12 @@ export const AppProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [detailLoading, setDetailLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [countries, setCountries] = useState([]);
+    const [countries, setCountries] = useState(getCountriesInLS());
     const [featuredCountries, setFeaturedCountries] = useState([]);
     const [countryDetail, setCountryDetail] = useState(null);
-    const [ search, setSearch] = useState('');
-    const [region, setRegion] = useState('');
-    const [theme, setTheme] = useState('light-theme');
+    const [ search, setSearch] = useState(getSearchWordInLS());
+    const [region, setRegion] = useState(getRegionInLS());
+    const [theme, setTheme] = useState(getThemeInLS());
 
     const toggleTheme = () => {
         if(theme === 'light-theme'){
@@ -59,6 +66,7 @@ export const AppProvider = ({ children }) => {
         try {
             const {data} = await axios(url);
             const countryThatStarsWith = data.filter(country => country.name.common.toLowerCase().startsWith(search.toLowerCase()));
+            localStorage.setItem('countries', JSON.stringify(countryThatStarsWith));
             setCountries(countryThatStarsWith);
             setLoading(false)
         } catch (error) {
@@ -72,6 +80,7 @@ export const AppProvider = ({ children }) => {
         try {
             const {data} = await axios(url);
             console.log(data);
+            localStorage.setItem('countries', JSON.stringify(data));
             setCountries(data);
             setLoading(false)
         } catch (error) {
@@ -97,7 +106,16 @@ export const AppProvider = ({ children }) => {
 
     useEffect(() => {
         document.documentElement.className = theme;
+        localStorage.setItem('theme', theme);
     }, [theme]);
+
+    useEffect(() => {
+        localStorage.setItem('search', search);
+        localStorage.setItem('region', region);
+        if(!search || !region) {
+            removeCountriesInLS();
+        }
+    }, [search, region]);
 
     return (
         <AppContext.Provider

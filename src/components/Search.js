@@ -39,6 +39,7 @@ const Wrapper = styled.div`
     padding: 5px;
     width: 100%;
     background-color: var(--container-color);
+    color: var(--text-color);
     &:focus {
       outline: none;
       border: none;
