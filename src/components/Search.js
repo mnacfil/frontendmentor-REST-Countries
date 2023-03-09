@@ -4,7 +4,7 @@ import {FaSearch} from 'react-icons/fa';
 import { useGlobalContext } from '../context';
 
 const Search = () => {
-  const { search, setSearch } = useGlobalContext();
+  const { search, setSearch, setRegion } = useGlobalContext();
   return (
     <Wrapper>
       <FaSearch />
@@ -12,7 +12,10 @@ const Search = () => {
         type="text"
         placeholder='Search for a country...'
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setRegion('');
+          setSearch(e.target.value);
+        }}
         />
     </Wrapper>
   )
