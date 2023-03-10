@@ -206,7 +206,7 @@ export const countriesCode = [
 {name: "Saudi Arabia", code: "SAU"},
 {name: "Senegal", code: "SEN"},
 {name: "Serbia", code: "SRB"},
-{name: "Serbia(Kosovo)", code: "UNK"},
+{name: "Kosovo", code: "UNK"},
 {name: "Seychelles", code: "SYC"},
 {name: "Sierra Leone", code: "SLE"},
 {name: "Singapore", code: "SGP"},

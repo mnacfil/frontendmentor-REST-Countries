@@ -12,8 +12,12 @@ const Detail = () => {
   const {countryName} = useParams();
   const { countryDetail, fetchDetailOfCountry, detailLoading, error} = useGlobalContext();
 
+  const getDetailOfCountry = (url) => {
+    fetchDetailOfCountry(url);
+  }
+
   useEffect(() => {
-    fetchDetailOfCountry(`${restCountryAPI}/${countryName}`);
+    getDetailOfCountry(`${restCountryAPI}/${countryName}`);
   }, [countryName]);
 
   if(detailLoading) return <Loading />
@@ -80,7 +84,10 @@ const Detail = () => {
               <div>
                 {borders.map((border, index) => {
                   return (
-                    <button key={index}>
+                    <button
+                      key={index}
+                      onClick={() => getDetailOfCountry(`${restCountryAPI}/${convertCodeToName(border)}`)}
+                      >
                       {convertCodeToName(border)}
                     </button>
                   )
