@@ -83,12 +83,13 @@ const Detail = () => {
               <h4>Border Countries:</h4>
               <div>
                 {borders.map((border, index) => {
+                  const borderName = convertCodeToName(border);
                   return (
                     <button
                       key={index}
-                      onClick={() => getDetailOfCountry(`${restCountryAPI}/${convertCodeToName(border)}`)}
+                      onClick={() => getDetailOfCountry(`${restCountryAPI}/${borderName}`, )}
                       >
-                      {convertCodeToName(border)}
+                      {borderName}
                     </button>
                   )
                 })}

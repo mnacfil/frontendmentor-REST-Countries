@@ -4,6 +4,7 @@ import Country from './Country';
 import { useGlobalContext } from '../context';
 import Loading from './Loading';
 import Error from './Error';
+import NoCountryFound from './NoCountryFound';
 
 const Countries = () => {
 const { featuredCountries, countries, loading, error, search, region } = useGlobalContext();
@@ -15,10 +16,12 @@ if(error) return <Error />
 // FeaturedCountries are default country to be display;
 let displayCountries = (search || region) ? countries : featuredCountries;
 
+if(displayCountries.length === 0) return <NoCountryFound />
+
   return (
     <Wrapper className='center'>
       {displayCountries.map((country, index) => {
-        return <Country {...country} key={index}/>
+        return <Country {...country} key={index} loading={loading}/>
       })}
     </Wrapper>
   )
