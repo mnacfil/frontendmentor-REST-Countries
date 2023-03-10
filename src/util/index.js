@@ -1,3 +1,4 @@
 import {formatValue} from './formatter';
+import { convertCodeToName } from './convertCodeToName';
 
-export { formatValue }
+export { formatValue, convertCodeToName };

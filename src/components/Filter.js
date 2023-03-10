@@ -10,10 +10,6 @@ const Filter = () => {
 
   const toggleDropDown = () => {
     setShowRegion(!showRegion);
-    // set back the value of region to empty state
-    if(!showRegion) {
-      setRegion('');
-    }
   }
 
   return (
@@ -100,17 +96,6 @@ const Wrapper = styled.div`
 
     }
   }
-
-  /* select {
-    background-color: var(--container-color);
-    width: 250px;
-    height: 100%;
-    outline: none;
-    border: none;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    font-size: 18px;
-  } */
 
   @media screen and (min-width: 768px){
 

@@ -5,18 +5,18 @@ import { restCountryAPI } from '../constant';
 import { useGlobalContext } from '../context';
 import {Loading, Header} from '../components';
 import {BsArrowLeft} from 'react-icons/bs';
-import {formatValue} from '../util';
+import {formatValue, convertCodeToName} from '../util';
 import {Link} from 'react-router-dom';
 
 const Detail = () => {
   const {countryName} = useParams();
-  const { countryDetail, fetchDetailOfCountry, loading, error} = useGlobalContext();
+  const { countryDetail, fetchDetailOfCountry, detailLoading, error} = useGlobalContext();
 
   useEffect(() => {
     fetchDetailOfCountry(`${restCountryAPI}/${countryName}`);
   }, [countryName]);
 
-  if(loading) return <Loading />
+  if(detailLoading) return <Loading />
 
   const {
     flags: {svg, alt},
@@ -30,10 +30,22 @@ const Detail = () => {
     tld,
     borders
   } = countryDetail;
+
   const [common, official, native] = Object.values(name);
-  const {official: nativeOfficial, common: nativeCommonName} = Object.values(native)[0];
-  const dialect = Object.values(languages).join(', ');
-  const {name: currency} = Object.values(currencies)[0];
+  let nativeName = common;
+  let speakingLanguage = "No Data";
+  let currency = 'No Data';
+  if(native) {
+    const {official: nativeOfficial, common: nativeCommonName} = Object.values(native)[0];
+    nativeName = nativeCommonName;
+  }
+  if(languages) {
+    speakingLanguage = Object.values(languages).join(', ');
+  }
+  if(currencies) {
+    const { name: nameOfCurrency } = Object.values(currencies)[0];
+    currency = nameOfCurrency
+  }
 
   return <>
     <Header />
@@ -50,7 +62,7 @@ const Detail = () => {
           <h3>{common}</h3>
           <div className='detail-align'>
             <div className="detail-left">
-              <p>Native Name: <span>{nativeCommonName}</span></p>
+              <p>Native Name: <span>{nativeName}</span></p>
               <p>Population: <span>{formatValue(population)}</span></p>
               <p>Region: <span>{region}</span></p>
               <p>Sub Region: <span>{subregion}</span></p>
@@ -59,7 +71,7 @@ const Detail = () => {
             <div className="detail-right">
               <p>Top Level Domain: <span>{tld}</span></p>
               <p>Currencies: <span>{currency}</span></p>
-              <p>Languages: <span>{dialect}</span></p>
+              <p>Languages: <span>{speakingLanguage}</span></p>
             </div>
           </div>
           {borders &&
@@ -69,7 +81,7 @@ const Detail = () => {
                 {borders.map((border, index) => {
                   return (
                     <button key={index}>
-                      {border}
+                      {convertCodeToName(border)}
                     </button>
                   )
                 })}
@@ -95,14 +107,14 @@ const Wrapper = styled.main`
     justify-content: space-evenly;
     padding: 8px 0;
     border: none;
-    background: var(--white);
+    background: var(--container-color);
     outline: none;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     border-radius: 5px;
     font-weight: 400;
     cursor: pointer;
     font-size: 16px;
-    color: #222;
+    color: var(--text-color);
 
     svg {
       font-size: 20px;
@@ -118,17 +130,29 @@ const Wrapper = styled.main`
 
       img {
         width: 100%;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       }
     }
     .detail-info {
       margin-top: 2.5rem;
 
+      span {
+        color: var(--light-mode-input);
+      }
+
       .detail-borders{
+
+        h4 {
+          font-weight: 600;
+        }
 
         div {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
           gap: 10px;
+          button {
+            width: 120px;
+          }
         }
       }
 
