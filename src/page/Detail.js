@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { restCountryAPI } from '../constant';
 import { useGlobalContext } from '../context';
-import {Loading, Header} from '../components';
+import {Loading, Error, Header} from '../components';
 import {BsArrowLeft} from 'react-icons/bs';
 import {formatValue, convertCodeToName} from '../util';
 import {Link} from 'react-router-dom';
 
 const Detail = () => {
   const {countryName} = useParams();
-  const { countryDetail, fetchDetailOfCountry, detailLoading, error} = useGlobalContext();
+  const { countryDetail, fetchDetailOfCountry, detailLoading, detailError} = useGlobalContext();
 
   const getDetailOfCountry = (url) => {
     fetchDetailOfCountry(url);
@@ -21,6 +21,7 @@ const Detail = () => {
   }, [countryName]);
 
   if(detailLoading) return <Loading />
+  if(detailError) return <Error />
 
   const {
     flags: {svg, alt},

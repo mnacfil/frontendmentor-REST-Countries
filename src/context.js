@@ -14,6 +14,7 @@ export const AppContext = React.createContext();
 export const AppProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [detailLoading, setDetailLoading] = useState(true);
+    const [detailError, setDetailError] = useState(false);
     const [error, setError] = useState(false);
     const [countries, setCountries] = useState(getCountriesInLS());
     const [featuredCountries, setFeaturedCountries] = useState([]);
@@ -57,7 +58,7 @@ export const AppProvider = ({ children }) => {
         } catch (error) {
             console.log(error);
             setDetailLoading(false);
-            setError(true);
+            setDetailError(true);
         }
     }
 
@@ -129,6 +130,7 @@ export const AppProvider = ({ children }) => {
                 error,
                 countryDetail,
                 theme,
+                detailError,
                 toggleTheme,
                 fetchDetailOfCountry,
                 setSearch,

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import {formatValue} from '../util/formatter';
 import { Link} from 'react-router-dom';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const Country = (props) => {
   const {
@@ -19,7 +18,7 @@ const Country = (props) => {
       <Wrapper>
         <img src={png} alt={alt} />
         <div className="data">
-          <h3>{common || <Skeleton/>}</h3>
+          <h3>{common}</h3>
           <p>Population: <span>{formatValue(population)}</span></p>
           <p>Region: <span>{region}</span></p>
           <p>Capital: <span>{capital}</span></p>

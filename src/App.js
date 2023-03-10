@@ -1,6 +1,5 @@
 import {Route, Routes, BrowserRouter} from 'react-router-dom'
-import Home from './page/Home';
-import Detail from './page/Detail';
+import {Home, Detail, NotFoundPage} from './page';
 
 function App() {
   return (
@@ -8,6 +7,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/detail/:countryName' element={<Detail />} />
+        <Route path='*' element={<NotFoundPage />}/>
       </Routes>
     </BrowserRouter>
   );
