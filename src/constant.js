@@ -4,7 +4,7 @@
 export const restCounriesAPI = 'https://restcountries.com/v3.1/all';
 
 // search base on partial name or full country name
-export const restCountryAPI = 'https://restcountries.com/v3.1/nameZ'
+export const restCountryAPI = 'https://restcountries.com/v3.1/name'
 
 // search by region name
 export const restRegionCountriesAPI = 'https://restcountries.com/v3.1/region';
